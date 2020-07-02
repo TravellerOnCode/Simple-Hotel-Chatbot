@@ -6,10 +6,52 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - cleaning_service
+  - cleaning_service_time
+  - faq_check_in
+  - faq_check_out
+  - faq_reservation_cancel
+  - faq_cancellation_policy
+  - faq_restaurant
+  - faq_breakfast_availability
+  - faq_breakfast_timings
+  - faq_restaurant_timings
+  - room_booking_direct:
+      use_entities: []
+  - room_booking_immediate:
+      use_entities: []
+  - room_booking_type
+  - room_booking_count
+  - out_of_scope
+  - gratitude
+
+
+
+actions:
+    - action_send_clean_service  
+    - action_apologize
+    
+
+forms:
+ - roombooking_form
+  
+entities:
+ - booking_time
+ - time_type
+ - roomcount
+ - roomtype
+
+slots:
+  roomtype:
+    type: unfeaturized
+  roomcount:
+    type: unfeaturized
+    
+
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hey, welcome to Hotel California. I am Cal, your all time guide. How can I help you ?"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -19,14 +61,81 @@ responses:
   - text: "Did that help you?"
 
   utter_happy:
-  - text: "Great, carry on!"
+  - text: "Awesome, hope you have a lovely stay !"
+  
+  utter_gratitude:
+  - text: "You are welcome !"
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Bye, hope you had a lovely stay !"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "I am a Cal, all-time guide to Hotel California. Created by a Geek powered by Rasa."
+  
+  utter_ask_clean_service:
+  - text: "When should I send for cleaning ?"
+  
+  utter_send_clean_service:
+  - text: "Sure, I am sending someone right now."
+  
+  utter_schedule_clean_service:
+  - text: "Sure, scheduling a cleaning service at 7 P.M."
+  
+  utter_checkin_time:
+  - text: "Check-in time starts at 4 PM. Minimum check-in age is 21. Please contact the reception for early check-in requests."
+  
+  utter_checkout_time:
+  - text: "Check-out time is 11 AM. Please contact the reception for late checkout requests."
+  
+  utter_cancel_reservation:
+  - text: "To cancel a reservation, select the “Reservations” link from the homepage. \n On the Reservations page, under the heading ‘View, Change or Cancel a Reservation,’ enter your confirmation number, and either the last name on the reservation or the last four digits of the credit card used to make the reservation."
+  
+  utter_cancellation_policy:
+  - text: "The booking deposit is refundable if the cancellation occurs at least 15 days before arrival. For cancellations made after this limit, a penalty will be imposed based on the cancellation policy."
+  
+  utter_restaurant:
+  - text: "Yes, the hotel has a restaurant called the Zephyr Bar. With our menu we strive to reflect the historic art and the spirit of our neighborhood by offering a glimpse into what makes our area unique."
+  
+  utter_breakfast_availability:
+  - text: "The hotel provides its guests with a free made-to-order breakfast each morning."
+  
+  utter_breakfast_timings:
+  - text: "Monday through Friday breakfast is 6 am to 9 am. On Saturday and Sunday, we are open from 7 am to 10:30 am."
+  
+  utter_restaurant_timings:
+  - text: "Our restaurant serves a dazzling 24-hour menu."
+  
+  utter_ask_roomcount:
+  - text: "How many rooms would you like to book?"
+  
+  
+  utter_ask_roomtype:
+  - text: "What type of room would you want to book?"
+  
+    buttons:
+    - title: "Super"
+      payload: '/room_booking_type{"roomtype":"super"}'
+    - title: "Delux"
+      payload: '/room_booking_type{"roomtype":"delux"}'
+      
+  utter_submit:
+  - text: "Booking Room. Please wait. \n You have chosen to book {roomcount} {roomtype} rooms"
+      
+  utter_slot_values:
+  - text: "You have chosen to book {roomcount} {roomtype} rooms"
+  
+  utter_ask_affirmation:
+  - text: "Did you mean ?"
+  
+  utter_ask_rephrase:
+  - text: "Cound you please rephrase again ?"
+  
+  
+  
 
+
+    
+  
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
